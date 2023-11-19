@@ -1,12 +1,12 @@
 import mysql.connector
 
 campos_bases = {
-    "alunos": {
+    "aluno": {
         "campos": ["nome", "cpf", "idade", "telefone", "email"],
         "val": "%s,%s,%d%,%s,%s",
     },
     "funcionario": {
-        "campos": ["nome", "cpf", "idade", "telefone", "email"],
+        "campos": ["nome", "cpf", "departamento", "salario", "email"],
         "val": "%s,%s,%d%,%s,%s",
     },
     "personal": {
@@ -43,7 +43,7 @@ def creater(op_tabela):
 
     # Dados
     nome = input("Nome: ")
-    cpf = input("CPF:")
+    cpf = input("CPF: ")
     idade = input("Idade: ")
     telefone = input("Telefone: ")
     email = input("Email: ")
@@ -70,7 +70,6 @@ def reader(op_tabela):
     cursor = create_cursor(banco)
 
     # Query
-    tabela = campos_bases[op_tabela]
     sql = f"SELECT * from {op_tabela};"
     cursor.execute(sql)
     resultado = cursor.fetchall()

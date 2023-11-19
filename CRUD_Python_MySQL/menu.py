@@ -9,7 +9,7 @@ menu = """- CRIAR
 opção: """
 
 menu_tabelas = """=========TABELAS=========
-- ALUNOS
+- ALUNO
 - FUNCIONARIO
 - PERSONAL
 - MODALIDADES
@@ -19,7 +19,7 @@ opção: """
 
 
 while True:
-    op_tab_validas = ["alunos", "funcionario", "personal", "modalidades", "sair"]
+    op_tab_validas = ["aluno", "funcionario", "personal", "modalidades", "sair"]
     op_menu_tabela = input(menu_tabelas).lower().strip()
     if op_menu_tabela not in op_tab_validas:
         print("Opção invalida! Verifique a resposta passada e tente novamente.")
