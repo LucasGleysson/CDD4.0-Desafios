@@ -1,32 +1,46 @@
-menu = """ MENU
-1 - CRIAR
-2 - VIZUALIZAR
-3 - ATUALIZAR
-4 - DELETAR
-0 - SAIR
+import database
+
+menu = """- CRIAR
+- VIZUALIZAR
+- ATUALIZAR
+- DELETAR
+- VOLTAR
 
 opção: """
 
-menu_tabelas = """MENU
-1 - ALUNO
-2 - FUNCIONARIO
-3 - PERSONAL
-4 - MODALIDADE
-0 - VOLTAR
+menu_tabelas = """=========TABELAS=========
+- ALUNOS
+- FUNCIONARIO
+- PERSONAL
+- MODALIDADES
+- SAIR
 
 opção: """
-op_menu = input(menu)
-def op_tabela(op_menu):
-    ...
 
 
 while True:
-    op_menu = input(menu)
-
-    if op_menu not in "12340":
-        print("Opção invalida! Escolha entre as opções na tela.")
+    op_tab_validas = ["alunos", "funcionario", "personal", "modalidades", "sair"]
+    op_menu_tabela = input(menu_tabelas).lower().strip()
+    if op_menu_tabela not in op_tab_validas:
+        print("Opção invalida! Verifique a resposta passada e tente novamente.")
         continue
-    if op_menu == "0":
+    elif op_menu_tabela == "sair":
         break
-    elif op_menu == "1":
-        ...
+    else:
+        print("=" * 26)
+        print(f"TABELA: {op_menu_tabela.upper()}")
+        op_men_validas = ["criar", "vizualizar", "atualizar", "deletar", "voltar"]
+        op_menu = input(menu).lower().strip()
+        if op_menu not in op_men_validas:
+            print("Opção invalida! Verifique a resposta passada e tente novamente.")
+            continue
+        elif op_menu == "voltar":
+            continue
+
+        if op_menu == "criar":
+            novo_id = database.creater(op_menu_tabela)
+            print(f"Cadastro efetuado! Novo ID: {novo_id}")
+        elif op_menu == "vizualizar":
+            database.reader(op_menu_tabela)
+        elif op_menu == "deletar":
+            database.delete(op_menu_tabela)
