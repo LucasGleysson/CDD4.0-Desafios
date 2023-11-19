@@ -3,11 +3,11 @@ import mysql.connector
 campos_bases = {
     "aluno": {
         "campos": ["nome", "cpf", "idade", "telefone", "email"],
-        "val": "%s,%s,%d%,%s,%s",
+        "val": "%s,%s,%s,%s,%s",
     },
     "funcionario": {
         "campos": ["nome", "cpf", "departamento", "salario", "email"],
-        "val": "%s,%s,%d%,%s,%s",
+        "val": "%s,%s,%s,%s,%s",
     },
     "personal": {
         "campos": ["nome", "cpf", "cref", "endereco", "email", "telefone"],
@@ -53,7 +53,7 @@ def creater(op_tabela):
     tabela = campos_bases[op_tabela]
     campos = ", ".join(tabela["campos"])
     val = tabela["val"]
-    sql = f"INSERT INTO {op_tabela} ({campos}) VALUES ({val})"
+    sql = f"INSERT INTO {op_tabela} ({campos}) VALUES ({val});"
 
     # Commit
     cursor.execute(sql, dados)
@@ -81,5 +81,17 @@ def reader(op_tabela):
     close_banco(banco)
 
 
-def delete(op_menu_tabela):
-    return None
+def delete(op_tabela):
+    banco = open_db()
+    cursor = create_cursor(banco)
+
+    id_delete = int(input("Digite o ID para deletar: "))
+    tabela = op_tabela
+    sql = f"DELETE FROM {tabela} WHERE id = %s;"
+    cursor.execute(sql, (id_delete,))
+    banco.commit()
+
+    close_cursor(cursor)
+    close_banco(banco)
+
+    print("ID deletado!")
